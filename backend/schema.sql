@@ -11,20 +11,14 @@ create table users (
   user_lname varchar(30) not null,
   user_phone varchar(25) not null,
   user_password varchar(50) not null,
-  user_is_admin boolean not null default false
-);
-
-create table favorites (
-  favorite_id serial primary key,
-  user_id integer not null,
-  constraint favorite_fk1 foreign key (user_id) references users(user_id)
+  user_is_admin varchar(5) not null default 'false'
 );
 
 create table orders (
   order_id serial primary key,
   user_id integer not null,
   order_datetime timestamp not null,
-  constraint order_fk1 foreign key (user_id) references users(user_id)
+  constraint order_fk1 foreign key (user_id) references users(user_id) on delete cascade
 );
 
 create table pickup_locations (
@@ -38,8 +32,8 @@ create table pickups (
   pickup_location_id integer not null,
   pickup_start_time timestamp not null,
   pickup_end_time timestamp not null,
-  constraint pickup_fk1 foreign key (order_id) references orders(order_id),
-  constraint pickup_fk2 foreign key (pickup_location_id) references pickup_locations(pickup_location_id)
+  constraint pickup_fk1 foreign key (order_id) references orders(order_id) on delete cascade,
+  constraint pickup_fk2 foreign key (pickup_location_id) references pickup_locations(pickup_location_id) on delete cascade
 );
 
 create table categories (
@@ -54,15 +48,15 @@ create table items (
   item_price decimal(9,2) not null,
   item_qoh integer not null,
   item_description varchar(256) not null,
-  constraint item_fk1 foreign key (category_id) references categories(category_id)
+  constraint item_fk1 foreign key (category_id) references categories(category_id) on delete cascade
 );
 
-create table items_favorites (
-  item_favorite_id serial primary key,
+create table items_users (
+  item_user_id serial primary key,
   item_id integer not null,
-  favorite_id integer not null,
-  constraint item_favorite_fk1 foreign key (item_id) references items(item_id),
-  constraint item_favorite_fk2 foreign key (favorite_id) references favorites(favorite_id)
+  user_id integer not null,
+  constraint item_user_fk1 foreign key (item_id) references items(item_id) on delete cascade,
+  constraint item_user_fk2 foreign key (user_id) references users(user_id) on delete cascade
 );
 
 create table orderline (
@@ -70,14 +64,13 @@ create table orderline (
   item_id integer not null,
   order_id integer not null,
   item_quantity integer not null,
-  constraint orderline_fk1 foreign key (item_id) references items(item_id),
-  constraint orderline_fk2 foreign key (order_id) references orders(order_id)
+  constraint orderline_fk1 foreign key (item_id) references items(item_id) on delete cascade,
+  constraint orderline_fk2 foreign key (order_id) references orders(order_id) on delete cascade
 );
 
 select * from categories;
-select * from favorites;
 select * from items;
-select * from items_favorites;
+select * from items_users;
 select * from orderline;
 select * from orders;
 select * from pickup_locations;

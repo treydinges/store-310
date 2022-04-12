@@ -12,12 +12,12 @@ function ReadUser() {
 
   const setData = (data) => {
     let { user_id, user_fname, user_lname, user_phone, user_password, user_is_admin } = data;
-    localStorage.setItem('ID', user_id);
-    localStorage.setItem('First Name', user_fname);
-    localStorage.setItem('Last Name', user_lname);
-    localStorage.setItem('Phone Number', user_phone);
-    localStorage.setItem('Password', user_password);
-    localStorage.setItem('Is Admin', user_is_admin);
+    localStorage.setItem('user_id', user_id);
+    localStorage.setItem('user_fname', user_fname);
+    localStorage.setItem('user_lname', user_lname);
+    localStorage.setItem('user_phone', user_phone);
+    localStorage.setItem('user_password', user_password);
+    localStorage.setItem('user_is_admin', user_is_admin);
   }
 
   const getData = () => {
@@ -55,7 +55,7 @@ function ReadUser() {
                 <Table.Cell>{data.user_fname}</Table.Cell>
                 <Table.Cell>{data.user_lname}</Table.Cell>
                 <Table.Cell>{data.user_phone}</Table.Cell>
-                <Table.Cell>{data.user_is_admin === true ? 'Yes' : 'No'}</Table.Cell>
+                <Table.Cell>{data.user_is_admin === 'true' ? 'Yes' : 'No'}</Table.Cell>
                 <Link to='/updateuser'>
                   <Table.Cell> 
                     <Button onClick={() => setData(data)}>Update</Button>
