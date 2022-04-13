@@ -13,6 +13,28 @@ router.get('/api/get/getcategories', (req, res, next ) => {
   })
 })
 
+router.get('/api/get/getpickuplocations', (req, res, next ) => {
+  pool.query(`SELECT * FROM pickup_locations 
+              ORDER BY pickup_location_id DESC`, 
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
+
+router.post('/api/post/createpickuplocation', (req, res, next) => {
+
+
+  const values = [ req.body.pickup_location_parking_spot,
+                 ]
+  pool.query(`INSERT INTO pickup_locations(pickup_location_parking_spot)
+              VALUES($1)`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows)
+  })
+})
+
 router.post('/api/post/createcategory', (req, res, next) => {
   const values = [ req.body.category_name,
                  ]
@@ -23,6 +45,8 @@ router.post('/api/post/createcategory', (req, res, next) => {
       res.json(q_res.rows)
   })
 })
+
+
 
 router.put('/api/put/updatecategory', (req, res, next) => {
   const values = [ req.body.category_id,
@@ -45,6 +69,14 @@ router.put('/api/delete/deletecategory', (req, res, next) => {
   })
 })
 
+router.put('/api/delete/deletepickuplocation', (req, res, next) => {
+  const pickup_location_id = req.body.pickup_location_id
+  pool.query(`DELETE FROM pickup_locations WHERE pickup_location_id = $1`, [ pickup_location_id ],
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
 // user queries
 router.get('/api/get/getusers', (req, res, next ) => {
   pool.query(`SELECT * FROM users 
@@ -54,6 +86,7 @@ router.get('/api/get/getusers', (req, res, next ) => {
       res.json(q_res.rows);
   })
 })
+
 
 router.post('/api/post/createuser', (req, res, next) => {
   const values = [ req.body.user_fname,
@@ -86,6 +119,17 @@ router.put('/api/put/updateuser', (req, res, next) => {
   })
 })
 
+router.put('/api/put/updatepickuplocation', (req, res, next) => {
+  const values = [ req.body.pickup_location_id,
+                   req.body.pickup_location_parking_spot, 
+                 ]
+  pool.query(`UPDATE users SET pickup_location_parking_spot=$2
+              WHERE pickup_location_id = $1`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
 router.put('/api/delete/deleteuser', (req, res, next) => {
   const user_id = req.body.user_id
   pool.query(`DELETE FROM users WHERE user_id = $1`, [ user_id ],
