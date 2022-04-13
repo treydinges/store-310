@@ -12,7 +12,7 @@ function Checkout() {
         getData();
     }, [])
 
-    const [category_name, set_category_name] = useState('');
+    const [pickup_location_parking_spot, set_pickup_location_parking_spot] = useState('');
     const getData = () => {
         axios.get('/api/get/getpickuplocations')
         .then((response) => {

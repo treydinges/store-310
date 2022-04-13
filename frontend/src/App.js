@@ -12,6 +12,9 @@ import UpdateCategory from './components/updatecategory';
 import Checkout from './components/checkout';
 import CreatePickupLocation from './components/createpickuplocation';
 import ReadPickupLocation from './components/readpickuplocation';
+import ReadPickups from './components/readpickups';
+import UpdatePickupLocation from './components/updatepickuplocation';
+
 function App() {
   return (
     <Router>
@@ -45,6 +48,12 @@ function App() {
           <Button>CheckoutPage</Button>
         </Link>
 
+        <Link to='/readpickups'>
+          <Button>Read Pickups</Button>
+        </Link>
+
+      
+
         <div>
           <Route exact path='/' component={Home} />
 
@@ -58,6 +67,8 @@ function App() {
           <Route exact path='/updatecategory' component={UpdateCategory} />
           <Route exact path='/checkout' component={Checkout} />
           <Route exact path='/createpickuplocation' component={CreatePickupLocation} />
+          <Route exact path='/readpickups' component={ReadPickups} />
+          <Route exact path='/updatepickuplocation' component={UpdatePickupLocation} />
         </div>
 
       </div>

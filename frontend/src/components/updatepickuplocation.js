@@ -16,9 +16,8 @@ function UpdatePickupLocation() {
 
   const updateAPIData = () => {
     axios.put('/api/put/updatepickuplocation', {
-        pickup_location_id,
-        pickup_location_parking_spot,
-
+      pickup_location_id,
+      pickup_location_parking_spot,
     }).then(() => {
       history.push('/readpickuplocation');
     }).catch((err) => console.log(err))
@@ -26,13 +25,13 @@ function UpdatePickupLocation() {
 
   return (
     <div>
+      <label>Parking Spot</label>
       <Form>
- 
         <Form.Field>
-          <label>Pickup Parking Spot</label>
+          
           <input placeholder={set_pickup_location_parking_spot} onChange={(e) => set_pickup_location_parking_spot(e.target.value)}/>
         </Form.Field>
-        
+      
         <Button onClick={updateAPIData} type='submit'>Update</Button>
       </Form>
     </div>

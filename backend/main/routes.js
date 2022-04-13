@@ -77,6 +77,56 @@ router.put('/api/delete/deletepickuplocation', (req, res, next) => {
       res.json(q_res.rows);
   })
 })
+
+router.get('/api/get/getpickups', (req, res, next ) => {
+  pool.query(`SELECT * FROM pickups 
+              ORDER BY pickup_id DESC`, 
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
+
+router.put('/api/delete/deletepickups', (req, res, next) => {
+  const pickup_id = req.body.user_id
+  pool.query(`DELETE FROM pickups WHERE pickup_id = $1`, [ pickup_id ],
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+}) 
+
+
+router.post('/api/post/createpickups', (req, res, next) => {
+  const values = [ 
+                   req.body.order_id,
+                   req.body.pickup_location_id,
+                   req.body.pickup_start_time,
+                   req.body.pickup_end_time,
+                 ]
+  pool.query(`INSERT INTO pickups(order_id, pickup_location_id, pickup_start_time, pickup_end_time)
+              VALUES($1, $2, $3, $4)`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows)
+  })
+})
+
+router.put('/api/put/updatepickups', (req, res, next) => {
+  const values = [ req.body.pickup_id, 
+                  req.body.order_id,
+                  req.body.pickup_location_id,
+                  req.body.pickup_start_time,
+                  req.body.pickup_end_time,
+                 ]
+  pool.query(`UPDATE pickups SET order_id=$2, pickup_location_id=$3, pickup_start_time=$4, pickup_end_time=$5
+              WHERE pickup_id = $1`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
+
 // user queries
 router.get('/api/get/getusers', (req, res, next ) => {
   pool.query(`SELECT * FROM users 
@@ -123,7 +173,7 @@ router.put('/api/put/updatepickuplocation', (req, res, next) => {
   const values = [ req.body.pickup_location_id,
                    req.body.pickup_location_parking_spot, 
                  ]
-  pool.query(`UPDATE users SET pickup_location_parking_spot=$2
+  pool.query(`UPDATE pickup_locations SET pickup_location_parking_spot=$2
               WHERE pickup_location_id = $1`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
