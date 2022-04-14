@@ -40,6 +40,7 @@ function ReadUser() {
       <Table singleLine>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell>User ID</Table.HeaderCell>
             <Table.HeaderCell>User First Name</Table.HeaderCell>
             <Table.HeaderCell>User Last Name</Table.HeaderCell>
             <Table.HeaderCell>User Phone Number</Table.HeaderCell>
@@ -52,6 +53,7 @@ function ReadUser() {
           {APIData.map((data) => {
             return (
               <Table.Row>
+                <Table.Cell>{data.user_id}</Table.Cell>
                 <Table.Cell>{data.user_fname}</Table.Cell>
                 <Table.Cell>{data.user_lname}</Table.Cell>
                 <Table.Cell>{data.user_phone}</Table.Cell>
