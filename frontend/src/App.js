@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 
 import Home from './components/home';
+import Login from './components/login';
+
 import CreateUser from './components/createuser';
 import UpdateUser from './components/updateuser';
 import ReadUser from './components/readuser';
@@ -22,6 +24,14 @@ function App() {
   return (
     <Router>
       <div>
+        <Link to='/'>
+          <Button>Home</Button>
+        </Link>
+
+        <Link to='/login'>
+          <Button>Login</Button>
+        </Link>
+
         <Link to='/createuser'>
           <Button>Create User</Button>
         </Link>
@@ -56,6 +66,7 @@ function App() {
 
         <div>
           <Route exact path='/' component={Home} />
+          <Route exact path='/login' component={Login} />
 
           <Route exact path='/createuser' component={CreateUser} />
           <Route exact path='/updateuser' component={UpdateUser} />

@@ -5,6 +5,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
 function UpdateItem() {
+  const user_is_admin = localStorage.getItem('user_is_admin');
   let history = useHistory();
   const [item_id, set_item_id] = useState(null);
   const [category_id, set_category_id] = useState(null);
@@ -36,6 +37,7 @@ function UpdateItem() {
   }
 
   return (
+    user_is_admin === 'true' ?
     <div>
       <Form>
         <Form.Field>
@@ -61,6 +63,8 @@ function UpdateItem() {
         <Button onClick={updateAPIData} type='submit'>Update</Button>
       </Form>
     </div>
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 

@@ -3,6 +3,20 @@ var router = express.Router()
 var pool = require('./db')
 
 
+// login query
+router.put('/api/get/userlogin', (req, res, next ) => {
+  const values = [ req.body.user_phone,
+                   req.body.user_password,
+                 ]
+  pool.query(`SELECT user_id, user_is_admin
+              FROM users
+              WHERE user_phone = $1 and user_password = $2`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
+
 // item queries
 router.get('/api/get/getitems', (req, res, next ) => {
   pool.query(`SELECT * FROM items

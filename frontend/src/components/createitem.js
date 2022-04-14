@@ -7,6 +7,7 @@ import ReadCategory from './readcategory';
 
 function CreateItem() {
   let history = useHistory();
+  const user_is_admin = localStorage.getItem('user_is_admin');
   const [category_id, set_category_id] = useState(null);
   const [item_name, set_item_name] = useState('');
   const [item_price, set_item_price] = useState(0);
@@ -26,6 +27,7 @@ function CreateItem() {
   }
 
   return (
+    user_is_admin === 'true' ?
     <div>
       <ReadCategory></ReadCategory>
       <br></br>
@@ -53,6 +55,8 @@ function CreateItem() {
         <Button onClick={postData} type='submit'>Submit</Button>
       </Form>
     </div>
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 

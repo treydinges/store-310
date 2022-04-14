@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 
 function CreateCategory() {
   let history = useHistory();
+  const user_is_admin = localStorage.getItem('user_is_admin');
   const [category_name, set_category_name] = useState('');
 
   const postData = () => {
@@ -17,6 +18,7 @@ function CreateCategory() {
   }
 
   return (
+    user_is_admin === 'true' ?
     <div>
       <Form>
         <Form.Field>
@@ -26,6 +28,8 @@ function CreateCategory() {
         <Button onClick={postData} type='submit'>Submit</Button>
       </Form>
     </div>
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 

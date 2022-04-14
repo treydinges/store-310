@@ -5,6 +5,7 @@ import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 function ReadCategory() {
+  const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();
@@ -32,6 +33,7 @@ function ReadCategory() {
   }
 
   return (
+    user_is_admin === 'true' ?
     <div>
       <Table singleLine>
         <Table.Header>
@@ -60,6 +62,8 @@ function ReadCategory() {
         </Table.Body>
       </Table>
     </div>
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 
