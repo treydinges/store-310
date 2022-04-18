@@ -68,7 +68,7 @@ router.put('/api/delete/deleteitem', (req, res, next) => {
 })
 
 // order queries
-router.get('/api/get/getorders', (req, res, next ) => {
+router.put('/api/get/getorders', (req, res, next ) => {
   const values = [ req.body.user_id,
                  ]
   pool.query(`SELECT * FROM orders
@@ -82,13 +82,28 @@ router.get('/api/get/getorders', (req, res, next ) => {
 
 router.post('/api/post/createorder', (req, res, next) => {
   const values = [ req.body.user_id,
+                   'false',
                    req.body.order_datetime,
                  ]
-  pool.query(`INSERT INTO orders(user_id, order_datetime)
-              VALUES($1, $2)`, values,
+  pool.query(`INSERT INTO orders(user_id, order_is_completed, order_datetime)
+              VALUES($1, $2, $3)`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows)
+  })
+})
+
+router.put('/api/put/checkout', (req, res, next) => {
+  const values = [ req.body.order_id,
+                   req.body.user_id,
+                   'true',
+                   req.body.order_datetime,
+                 ]
+  pool.query(`UPDATE orders SET user_id = $2, order_is_completed = $3, order_datetime = $4
+              WHERE order_id = $1`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
   })
 })
 
@@ -109,7 +124,7 @@ router.put('/api/get/getfavorites', (req, res, next ) => {
               FROM items_users f JOIN items i
               ON f.item_id = i.item_id
               WHERE user_id = $1
-              ORDER BY item_user_id DESC`, values,
+              ORDER BY item_user_id ASC`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows);
@@ -145,7 +160,7 @@ router.get('/api/get/getorderlines', (req, res, next ) => {
               FROM orderline l JOIN items i
               ON l.item_id = i.item_id
               WHERE order_id = $1
-              ORDER BY orderline_id DESC`, values,
+              ORDER BY orderline_id ASC`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows);
