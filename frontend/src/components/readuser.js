@@ -5,6 +5,7 @@ import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 function ReadUser() {
+  const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();
@@ -36,10 +37,12 @@ function ReadUser() {
   }
 
   return (
+    user_is_admin === 'true' ?
     <div>
       <Table singleLine>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell>User ID</Table.HeaderCell>
             <Table.HeaderCell>User First Name</Table.HeaderCell>
             <Table.HeaderCell>User Last Name</Table.HeaderCell>
             <Table.HeaderCell>User Phone Number</Table.HeaderCell>
@@ -52,6 +55,7 @@ function ReadUser() {
           {APIData.map((data) => {
             return (
               <Table.Row>
+                <Table.Cell>{data.user_id}</Table.Cell>
                 <Table.Cell>{data.user_fname}</Table.Cell>
                 <Table.Cell>{data.user_lname}</Table.Cell>
                 <Table.Cell>{data.user_phone}</Table.Cell>
@@ -69,6 +73,8 @@ function ReadUser() {
         </Table.Body>
       </Table>
     </div>
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 

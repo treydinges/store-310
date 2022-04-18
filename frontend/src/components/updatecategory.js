@@ -5,13 +5,14 @@ import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
 function UpdateCategory() {
+  const user_is_admin = localStorage.getItem('user_is_admin');
   let history = useHistory();
-  const [category_id, setID] = useState(null);
-  const [category_name, setName] = useState('');
+  const [category_id, set_category_id] = useState(null);
+  const [category_name, set_category_name] = useState('');
 
   useEffect(() => {
-    setID(localStorage.getItem('category_id'));
-    setName(localStorage.getItem('category_name'));
+    set_category_id(localStorage.getItem('category_id'));
+    set_category_name(localStorage.getItem('category_name'));
   }, []);
 
   const updateAPIData = () => {
@@ -24,15 +25,18 @@ function UpdateCategory() {
   }
 
   return (
+    user_is_admin === 'true' ?
     <div>
       <Form>
         <Form.Field>
           <label>Category Name</label>
-          <input placeholder={category_name} onChange={(e) => setName(e.target.value)}/>
+          <input placeholder={category_name} onChange={(e) => set_category_name(e.target.value)}/>
         </Form.Field>
         <Button onClick={updateAPIData} type='submit'>Update</Button>
       </Form>
     </div>
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 
