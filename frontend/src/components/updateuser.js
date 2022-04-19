@@ -8,10 +8,10 @@ function UpdateUser() {
   let history = useHistory();
   const [user_id, set_user_id] = useState(null);
   const [user_fname, set_user_fname] = useState('');
-    const [user_lname, set_user_lname] = useState('');
-    const [user_phone, set_user_phone] = useState('');
-    const [user_password, set_user_password] = useState('');
-    const [user_is_admin, set_user_is_admin] = useState('false');
+  const [user_lname, set_user_lname] = useState('');
+  const [user_phone, set_user_phone] = useState('');
+  const [user_password, set_user_password] = useState('');
+  const [user_is_admin, set_user_is_admin] = useState('false');
 
   useEffect(() => {
     set_user_id(localStorage.getItem('user_id'));

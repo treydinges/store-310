@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-function ReadCategory() {
+function ReadOrders() {
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
@@ -12,34 +12,36 @@ function ReadCategory() {
   }, [])
 
   const setData = (data) => {
-    let { category_id , category_name } = data;
-    localStorage.setItem('category_id', category_id);
-    localStorage.setItem('category_name', category_name);
-  }
+    let { order_id , user_id, order_datetime } = data;
+    localStorage.setItem('order_id', order_id);
+    localStorage.setItem('user_id', user_id);
+    localStorage.setItem('order_datetime', order_datetime);
+}
 
   const getData = () => {
-    axios.get('/api/get/getcategories')
+    axios.get('/api/get/getorders')
     .then((response) => {
       setAPIData(response.data);
     }).catch((err) => console.log(err))
   }
 
-  const onDelete = (category_id) => {
-    axios.put('/api/delete/deletecategory', {
-      category_id
+  const onDelete = (order_id) => {
+    axios.put('/api/delete/deleteorder', {
+        order_id
     }).then(() => {
       getData();
     })
   }
 
   return (
-    user_is_admin === 'true' ?
+ 
     <div>
       <Table singleLine>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Category ID</Table.HeaderCell>
-            <Table.HeaderCell>Category Name</Table.HeaderCell>
+            <Table.HeaderCell>Order ID</Table.HeaderCell>
+            <Table.HeaderCell>User ID</Table.HeaderCell>
+            <Table.HeaderCell>Order Datetime</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -47,24 +49,25 @@ function ReadCategory() {
           {APIData.map((data) => {
             return (
               <Table.Row>
-                <Table.Cell>{data.category_id}</Table.Cell>
-                <Table.Cell>{data.category_name}</Table.Cell>
-                <Link to='/updatecategory'>
+                <Table.Cell>{data.order_id}</Table.Cell>
+                <Table.Cell>{data.user_id}</Table.Cell>
+                <Table.Cell>{data.order_datetime}</Table.Cell>
+                <Link to='/updateorders'>
                   <Table.Cell> 
                     <Button onClick={() => setData(data)}>Update</Button>
                   </Table.Cell>
                 </Link>
                 <Table.Cell>
-                  <Button onClick={() => onDelete(data.category_id)}>Delete</Button>
+                  <Button onClick={() => onDelete(data.order_id)}>Delete</Button>
                 </Table.Cell>
               </Table.Row>
           )})}
         </Table.Body>
       </Table>
     </div>
-    :
-    <h2>You are not an admin!</h2>
+   
+
   )
 }
 
-export default ReadCategory;
+export default ReadOrders;
