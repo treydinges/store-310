@@ -5,6 +5,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
 function CreatePickupLocation() {
+    const user_is_admin = localStorage.getItem('user_is_admin');
     let history = useHistory();
     const [pickup_location_parking_spot, set_pickup_location_parking_spot] = useState('');
     const postData = () => {
@@ -16,6 +17,7 @@ function CreatePickupLocation() {
     }
 
     return (
+        user_is_admin === 'true' ?
         <div>
             <Form>
                 <Form.Field>
@@ -25,6 +27,8 @@ function CreatePickupLocation() {
                 <Button onClick={postData} type='submit'>Submit</Button>
             </Form>
         </div>
+        :
+        <h2>You are not an admin!</h2>
     )
 }
 

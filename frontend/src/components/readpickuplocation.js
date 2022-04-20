@@ -5,6 +5,7 @@ import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 function ReadPickupLocation() {
+  const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();
@@ -33,6 +34,7 @@ function ReadPickupLocation() {
   }
 
   return (
+    user_is_admin === 'true' ?
     <div>
       <Table singleLine>
         <Table.Header>
@@ -61,6 +63,8 @@ function ReadPickupLocation() {
         </Table.Body>
       </Table>
     </div>
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 

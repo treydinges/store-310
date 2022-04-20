@@ -8,27 +8,22 @@ import ReadCategory from './readorderline';
 
 
 function CreateOrderline() {
-
   const [item_qoh, set_item_qoh] = useState(0);
-useEffect(() => {
-  set_item_id(localStorage.getItem('item_id'));
-  set_item_qoh(localStorage.getItem('item_qoh'));
-
-}, []);
+  useEffect(() => {
+    set_item_id(localStorage.getItem('item_id'));
+    set_item_qoh(localStorage.getItem('item_qoh'));
+  }, []);
 
 const updateAPIData = () => {
   axios.put('/api/put/updateItemsWithOrderlineCreation', {
     item_id,
-
     item_qoh,
-
   }).then(() => {
     history.push('/readitem');
   }).catch((err) => console.log(err))
 }
 
   let history = useHistory();
-  const user_is_admin = localStorage.getItem('user_is_admin');
 
   const [item_id, set_item_id] = useState(0);
   const [order_id, set_order_id] = useState(0);
@@ -64,7 +59,6 @@ const updateAPIData = () => {
       <ReadCategory></ReadCategory>
       <br></br>
       <Form>
-   
         <Form.Field>
           <label>Item ID</label>
           <input placeholder='Item ID' onChange={(e) => set_item_id(e.target.value)}/>

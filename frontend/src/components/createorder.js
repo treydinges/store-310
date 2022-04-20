@@ -3,11 +3,10 @@ import axios from 'axios';
 
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
-import ReadOrders from './readorders';
+import ReadOrder from './readorder';
 
 function CreateOrder() {
   let history = useHistory();
-  const user_is_admin = localStorage.getItem('user_is_admin');
   const [order_id, set_order_id] = useState(null);
   const [user_id, set_user_id] = useState(0);
   const [order_datetime, set_order_datetime] = useState('');
@@ -15,20 +14,18 @@ function CreateOrder() {
 
   const postData = () => {
     axios.post('/api/post/createorder', {
-
-        order_id,
-        user_id,
-        order_datetime,
-  
+      order_id,
+      user_id,
+      order_datetime,
     }).then(() => {
-      history.push('/readorders');
+      history.push('/readorder');
     }).catch((err) => console.log(err))
   }
 
   return (
    
     <div>
-      <ReadOrders></ReadOrders>
+      <ReadOrder></ReadOrder>
       <br></br>
       <Form>
         <Form.Field>

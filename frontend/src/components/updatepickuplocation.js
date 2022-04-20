@@ -5,6 +5,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
 function UpdatePickupLocation() {
+  const user_is_admin = localStorage.getItem('user_is_admin');
   let history = useHistory();
   const [pickup_location_id, set_pickup_location_id] = useState(null);
   const [pickup_location_parking_spot, set_pickup_location_parking_spot] = useState('');
@@ -24,6 +25,7 @@ function UpdatePickupLocation() {
   }
 
   return (
+    user_is_admin === 'true' ?
     <div>
       <label>Parking Spot</label>
       <Form>
@@ -35,6 +37,8 @@ function UpdatePickupLocation() {
         <Button onClick={updateAPIData} type='submit'>Update</Button>
       </Form>
     </div>
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 
