@@ -10,7 +10,7 @@
     "react-hooks-paginator": "^0.2.0",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.0",
+    "react-scripts": "^3.0.0",
     "semantic-ui-react": "^2.1.2"
   },
   "scripts": {
