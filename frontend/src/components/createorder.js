@@ -5,7 +5,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 import ReadOrders from './readorders';
 
-function CreateOrders() {
+function CreateOrder() {
   let history = useHistory();
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [order_id, set_order_id] = useState(null);
@@ -52,4 +52,4 @@ function CreateOrders() {
   )
 }
 
-export default CreateOrders;
+export default CreateOrder;

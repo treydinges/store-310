@@ -5,7 +5,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
 
-function UpdatePickups() {
+function UpdatePickup() {
   let history = useHistory();
   const [pickup_id, set_pickup_id] = useState(null);
   const [order_id, set_order_id] = useState('');
@@ -63,4 +63,4 @@ function UpdatePickups() {
   )
 }
 
-export default UpdatePickups;
+export default UpdatePickup;

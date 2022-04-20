@@ -5,7 +5,7 @@ import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 
-function ReadPickups() {
+function ReadPickup() {
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();
@@ -80,4 +80,4 @@ function ReadPickups() {
   )
 }
 
-export default ReadPickups;
+export default ReadPickup;

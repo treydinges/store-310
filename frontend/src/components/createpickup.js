@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
-function CreatePickups() {
+function CreatePickup() {
     let history = useHistory();
     const [order_id, set_order_id] = useState('');
     const [pickup_location_id, set_pickup_location_id] = useState('');
@@ -49,4 +49,4 @@ function CreatePickups() {
     )
 }
 
-export default CreatePickups;
+export default CreatePickup;

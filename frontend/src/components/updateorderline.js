@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
-function UpdateOrderlines() {
+function UpdateOrderline() {
   let history = useHistory();
   const [orderline_id, set_orderline_id] = useState(null);
   const [item_id, set_item_id] = useState(0);
@@ -52,4 +52,4 @@ function UpdateOrderlines() {
   )
 }
 
-export default UpdateOrderlines;
+export default UpdateOrderline;

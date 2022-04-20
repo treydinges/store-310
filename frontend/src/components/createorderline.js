@@ -4,10 +4,10 @@ import axios from 'axios';
 
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
-import ReadCategory from './readorderlines';
+import ReadCategory from './readorderline';
 
 
-function CreateOrderlines() {
+function CreateOrderline() {
 
   const [item_qoh, set_item_qoh] = useState(0);
 useEffect(() => {
@@ -88,4 +88,4 @@ const updateAPIData = () => {
   )
 }
 
-export default CreateOrderlines;
+export default CreateOrderline;

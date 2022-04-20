@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
-function UpdateOrders() {
+function UpdateOrder() {
   let history = useHistory();
   const [order_id, set_order_id] = useState(null);
   const [user_id, set_user_id] = useState(0);
@@ -47,4 +47,4 @@ function UpdateOrders() {
   )
 }
 
-export default UpdateOrders;
+export default UpdateOrder;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-function ReadOrders() {
+function ReadOrder() {
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
@@ -70,4 +70,4 @@ function ReadOrders() {
   )
 }
 
-export default ReadOrders;
+export default ReadOrder;

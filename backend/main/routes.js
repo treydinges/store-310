@@ -69,8 +69,11 @@ router.put('/api/delete/deleteitem', (req, res, next) => {
 
 // order queries
 router.get('/api/get/getorders', (req, res, next ) => {
-  pool.query(`SELECT * FROM orders 
-              ORDER BY order_id DESC`, 
+  const values = [ req.body.user_id,
+                 ]
+  pool.query(`SELECT * FROM orders
+              WHERE user_id = $1
+              ORDER BY order_datetime DESC`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows);
@@ -86,22 +89,6 @@ router.post('/api/post/createorder', (req, res, next) => {
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows)
-  })
-})
-
-
-
-router.put('/api/put/updateorders', (req, res, next) => {
-  const values = [ req.body.order_id,
-                   req.body.user_id, 
-                   req.body.order_datetime, 
-               
-                 ]
-  pool.query(`UPDATE orders SET user_id = $2, order_datetime = $3
-              WHERE order_id = $1`, values,
-    (q_err, q_res) => {
-      if(q_err) return next(q_err);
-      res.json(q_res.rows);
   })
 })
 
@@ -152,10 +139,13 @@ router.put('/api/delete/deletefavorite', (req, res, next) => {
 
 // orderline queries
 router.get('/api/get/getorderlines', (req, res, next ) => {
-
+  const values = [ req.body.order_id,
+                 ]
   pool.query(`SELECT *
-              FROM orderline 
-              ORDER BY orderline_id DESC`,
+              FROM orderline l JOIN items i
+              ON l.item_id = i.item_id
+              WHERE order_id = $1
+              ORDER BY orderline_id DESC`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows);
@@ -165,50 +155,16 @@ router.get('/api/get/getorderlines', (req, res, next ) => {
 router.post('/api/post/createorderline', (req, res, next) => {
   const values = [ req.body.item_id,
                    req.body.order_id,
-                   req.body.item_quantity
                  ]
-    const queriesArr = [
-
-    {query: `INSERT INTO orderline(item_id, order_id, item_quantity)
-    VALUES($1, $2, $3)`},
-    {query: `UPDATE items SET item_qoh = (item_qoh - 1)
-    WHERE item_id = $1`, values}
-]
-
-  pool.query(`INSERT INTO orderline(item_id, order_id, item_quantity)
-  VALUES($1, $2, $3)`, values,
+  pool.query(`INSERT INTO orderline(item_id, order_id)
+              VALUES($1, $2);
+              
+              UPDATE items SET item_qoh = (item_qoh - 1)
+              WHERE item_id = $1`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows)
   })
-
-})
-router.put('/api/put/updateItemsWithOrderlineCreation2', (req, res, next) => {
-  const values = [ req.body.item_id,
-    req.body.order_id,
-    req.body.item_quantity
-            
-                 ]
-    pool.query(`UPDATE items SET item_qoh = $3
-    WHERE item_id = $1`, values,
-       (q_err, q_res) => {
-         if(q_err) return next(q_err);
-         res.json(q_res.rows);
-     })
-  
-})
-router.put('/api/put/updateItemsWithOrderlineCreation', (req, res, next) => {
-  const values = [ 
-                   req.body.item_id
-                 
-                 ]
-  pool.query(`UPDATE items SET item_qoh = '4'
-              WHERE item_id = $1`, values,
-    (q_err, q_res) => {
-      if(q_err) return next(q_err);
-      res.json(q_res.rows);
-  })
-  
 })
 
 router.put('/api/put/updateorderline', (req, res, next) => {
@@ -217,27 +173,15 @@ router.put('/api/put/updateorderline', (req, res, next) => {
                    req.body.quantity
                  ]
   pool.query(`UPDATE orderline SET quantity = $3
-              WHERE orderline_id = $1`, values,
+              WHERE orderline_id = $1;
+              
+              UPDATE items SET item_qoh = (item_qoh - $3)
+              WHERE item_id = $2`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows);
   })
-  
 })
-router.put('/api/put/updateItemsWithOrderlineChange', (req, res, next) => {
-  const values = [ req.body.orderline_id,
-                   req.body.item_id,
-                   req.body.quantity
-                 ]
-    pool.query(`UPDATE items SET item_qoh = (item_qoh - $3)
-    WHERE item_id = $2`, values,
-       (q_err, q_res) => {
-         if(q_err) return next(q_err);
-         res.json(q_res.rows);
-     })
-  
-})
-
 
 router.put('/api/delete/deleteorderline', (req, res, next) => {
   const values = [ req.body.orderline_id,

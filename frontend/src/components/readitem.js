@@ -37,7 +37,7 @@ function ReadItem() {
   }
 
   return (
-   
+    user_is_admin === 'true' ?
     <div>
       <Table singleLine>
         <Table.Header>
@@ -74,7 +74,8 @@ function ReadItem() {
         </Table.Body>
       </Table>
     </div>
-   
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 

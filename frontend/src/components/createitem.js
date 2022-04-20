@@ -27,7 +27,7 @@ function CreateItem() {
   }
 
   return (
- 
+    user_is_admin === 'true' ?
     <div>
       <ReadCategory></ReadCategory>
       <br></br>
@@ -55,7 +55,8 @@ function CreateItem() {
         <Button onClick={postData} type='submit'>Submit</Button>
       </Form>
     </div>
- 
+    :
+    <h2>You are not an admin!</h2>
   )
 }
 
