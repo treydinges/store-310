@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './components/home';
 import Login from './components/login';
 import Checkout from './components/checkout';
+import ShoppingCart from './components/shoppingcart';
 
 import CreateUser from './components/createuser';
 import UpdateUser from './components/updateuser';
@@ -44,6 +44,7 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
           <Route exact path='/checkout' component={Checkout} />
+          <Route exact path='/shoppingcart' component={ShoppingCart} />
 
           <Route exact path='/createuser' component={CreateUser} />
           <Route exact path='/updateuser' component={UpdateUser} />

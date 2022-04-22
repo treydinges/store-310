@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
@@ -19,9 +18,9 @@ function Nav() {
     } else {
       return (
         <span>
+          <Button onClick={() => history.push('/shoppingcart')}>Shopping Cart</Button>
           <Button onClick={() => signOut()}>Sign Out</Button>
           <Button onClick={() => history.push('/readfavorite')}>Favorites</Button>
-          <Button onClick={() => history.push('/readshoppingcart')}>Shopping Cart</Button>
           <Button onClick={() => history.push('/readorder')}>Previous Orders</Button>
         </span>
       );
@@ -43,6 +42,7 @@ function Nav() {
   }
 
   const signOut = () => {
+    localStorage.clear();
     localStorage.setItem('user_id', 'null');
     localStorage.setItem('user_is_admin', 'false');
     history.push('/')

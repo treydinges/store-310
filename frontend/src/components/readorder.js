@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Nav from './nav';
 
 function ReadOrder() {
-  const user_is_admin = localStorage.getItem('user_is_admin');
+  const user_id = localStorage.getItem('user_id');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();
@@ -21,8 +21,9 @@ function ReadOrder() {
 }
 
   const getData = () => {
-    axios.get('/api/get/getorders')
-    .then((response) => {
+    axios.put('/api/get/getorders', {
+      user_id
+    }).then((response) => {
       setAPIData(response.data);
     }).catch((err) => console.log(err))
   }
@@ -54,14 +55,14 @@ function ReadOrder() {
                 <Table.Cell>{data.order_id}</Table.Cell>
                 <Table.Cell>{data.user_id}</Table.Cell>
                 <Table.Cell>{data.order_datetime}</Table.Cell>
-                <Link to='/updateorders'>
+                {/* <Link to='/schedulepickup'>
                   <Table.Cell> 
                     <Button onClick={() => setData(data)}>Update</Button>
                   </Table.Cell>
-                </Link>
-                <Table.Cell>
+                </Link> */}
+                {/* <Table.Cell>
                   <Button onClick={() => onDelete(data.order_id)}>Delete</Button>
-                </Table.Cell>
+                </Table.Cell> */}
               </Table.Row>
           )})}
         </Table.Body>

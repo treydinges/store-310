@@ -41,6 +41,7 @@ function ReadUser() {
   return (
     user_is_admin === 'true' ?
     <div>
+      <Nav></Nav>
       <Table singleLine>
         <Table.Header>
           <Table.Row>
@@ -76,7 +77,10 @@ function ReadUser() {
       </Table>
     </div>
     :
-    <h2>You are not an admin!</h2>
+    <div>
+      <Nav></Nav>
+      <h2>You are not an admin!</h2>
+    </div>
   )
 }
 

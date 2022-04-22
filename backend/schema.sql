@@ -18,6 +18,7 @@ create table orders (
   order_id serial primary key,
   user_id integer not null,
   order_datetime timestamp not null,
+  is_complete varchar(5) not null default 'false',
   constraint order_fk1 foreign key (user_id) references users(user_id) on delete cascade
 );
 
