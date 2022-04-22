@@ -5,6 +5,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 import ReadItem from './readitem';
 import ReadUser from './readuser';
+import Nav from './nav';
 
 function CreateFavorite() {
   let history = useHistory();
@@ -22,6 +23,7 @@ function CreateFavorite() {
 
   return (
     <div>
+      <Nav></Nav>
       <ReadItem></ReadItem>
       <ReadUser></ReadUser>
       <br></br>

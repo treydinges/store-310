@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
+import Nav from './nav';
+
 function UpdateItem() {
   const user_is_admin = localStorage.getItem('user_is_admin');
   let history = useHistory();
@@ -39,6 +41,7 @@ function UpdateItem() {
   return (
     user_is_admin === 'true' ?
     <div>
+      <Nav></Nav>
       <Form>
         <Form.Field>
           <label>Category ID</label>
@@ -64,7 +67,10 @@ function UpdateItem() {
       </Form>
     </div>
     :
-    <h2>You are not an admin!</h2>
+    <div>
+      <Nav></Nav>
+      <h2>You are not an admin!</h2>
+    </div>
   )
 }
 

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
+import Nav from './nav';
+
 function ReadUser() {
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);

@@ -40,73 +40,6 @@ import ReadPickup from './components/readpickup';
 function App() {
   return (
     <Router>
-      <div>
-        <Link to='/'>
-          <Button>Home</Button>
-        </Link>
-        <Link to='/login'>
-          <Button>Login</Button>
-        </Link>
-        <Link to='/checkout'>
-          <Button>Checkout</Button>
-        </Link>
-
-        <Link to='/createuser'>
-          <Button>Create User</Button>
-        </Link>
-        <Link to='/readuser'>
-          <Button>View User</Button>
-        </Link>
-
-        <Link to='/createcategory'>
-          <Button>Create Category</Button>
-        </Link>
-        <Link to='/readcategory'>
-          <Button>View Category</Button>
-        </Link>
-
-        <Link to='/createitem'>
-          <Button>Create Item</Button>
-        </Link>
-        <Link to='/readitem'>
-          <Button>View Item</Button>
-        </Link>
-
-        <Link to='/createfavorite'>
-          <Button>Create Favorite</Button>
-        </Link>
-        <Link to='/readfavorite'>
-          <Button>View Favorite</Button>
-        </Link>
-
-        <Link to='/createorderline'>
-          <Button>Create Order Line</Button>
-        </Link>
-        <Link to='/readorderline'>
-          <Button>View Order Line</Button>
-        </Link>
-
-        <Link to='/createorder'>
-          <Button>Create Order</Button>
-        </Link>
-        <Link to='/readorder'>
-          <Button>View Order</Button>
-        </Link>
-
-        <Link to='/createpickuplocation'>
-          <Button>Create Pickup Location</Button>
-        </Link>
-        <Link to='/readpickuplocation'>
-          <Button>View Pickup Location</Button>
-        </Link>
-
-        <Link to='/createpickup'>
-          <Button>Create Pickup</Button>
-        </Link>
-        <Link to='/readpickup'>
-          <Button>View Pickup</Button>
-        </Link>
-
         <div>
           <Route exact path='/' component={Home} />
           <Route exact path='/login' component={Login} />
@@ -142,8 +75,6 @@ function App() {
           <Route exact path='/updatepickup' component={UpdatePickup} />
           <Route exact path='/readpickup' component={ReadPickup} />
         </div>
-
-      </div>
     </Router>
   );
 }

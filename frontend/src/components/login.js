@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
+import Nav from './nav';
 
 function Login() {
   let history = useHistory();
@@ -21,13 +22,14 @@ function Login() {
     }).then((response) => {
       if (response.data[0].user_id) {
         setData(response.data[0].user_id, response.data[0].user_is_admin);
-        history.push('/readfavorite');
+        history.push('/');
       }
     }).catch((err) => console.log(err))
   }
 
   return (
     <div>
+      <Nav></Nav>
       <Form>
         <Form.Field>
           <label>Phone Number</label>

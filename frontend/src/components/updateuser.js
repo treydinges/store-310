@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
+import Nav from './nav';
+
 function UpdateUser() {
   let history = useHistory();
   const [user_id, set_user_id] = useState(null);
@@ -37,6 +39,7 @@ function UpdateUser() {
 
   return (
     <div>
+      <Nav></Nav>
       <Form>
         <Form.Field>
           <label>First Name</label>

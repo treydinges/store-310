@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
+import Nav from './nav';
+
 function ReadPickupLocation() {
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
@@ -36,6 +38,7 @@ function ReadPickupLocation() {
   return (
     user_is_admin === 'true' ?
     <div>
+      <Nav></Nav>
       <Table singleLine>
         <Table.Header>
           <Table.Row>
@@ -64,7 +67,10 @@ function ReadPickupLocation() {
       </Table>
     </div>
     :
-    <h2>You are not an admin!</h2>
+    <div>
+      <Nav></Nav>
+      <h2>You are not an admin!</h2>
+    </div>
   )
 }
 

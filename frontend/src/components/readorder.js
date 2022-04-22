@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
+import Nav from './nav';
+
 function ReadOrder() {
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
@@ -34,8 +36,8 @@ function ReadOrder() {
   }
 
   return (
- 
     <div>
+      <Nav></Nav>
       <Table singleLine>
         <Table.Header>
           <Table.Row>
@@ -65,8 +67,6 @@ function ReadOrder() {
         </Table.Body>
       </Table>
     </div>
-   
-
   )
 }
 

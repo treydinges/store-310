@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
+import Nav from './nav';
 
 function CreateUser() {
   let history = useHistory();
@@ -26,6 +27,7 @@ function CreateUser() {
 
   return (
     <div>
+      <Nav></Nav>
       <Form>
         <Form.Field>
           <label>First Name</label>

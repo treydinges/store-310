@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
+import Nav from './nav';
+
 
 function Checkout() {
   const [APIData, setAPIData] = useState([]);
@@ -21,6 +23,7 @@ function Checkout() {
 
   return (
     <div>
+      <Nav></Nav>
       <Table singleLine>
         <Table.Header>
           <header>CHECKOUT PAGE</header>

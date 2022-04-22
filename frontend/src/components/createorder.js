@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 import ReadOrder from './readorder';
+import Nav from './nav';
 
 function CreateOrder() {
   let history = useHistory();
@@ -25,6 +26,7 @@ function CreateOrder() {
   return (
    
     <div>
+      <Nav></Nav>
       <ReadOrder></ReadOrder>
       <br></br>
       <Form>

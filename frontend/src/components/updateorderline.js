@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
+import Nav from './nav';
+
 function UpdateOrderline() {
   let history = useHistory();
   const [orderline_id, set_orderline_id] = useState(null);
@@ -31,7 +33,7 @@ function UpdateOrderline() {
 
   return (
     <div>
-   
+      <Nav></Nav>
       <Form>
         <Form.Field>
           <label>Item ID</label>
@@ -45,7 +47,6 @@ function UpdateOrderline() {
           <label>Item Quantity</label>
           <input placeholder={item_quantity} onChange={(e) => set_item_quantity(e.target.value)}/>
         </Form.Field>
-      
         <Button onClick={updateAPIData} type='submit'>Update</Button>
       </Form>
     </div>

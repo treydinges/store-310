@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
+import Nav from './nav';
 
 function CreatePickupLocation() {
     const user_is_admin = localStorage.getItem('user_is_admin');
@@ -19,6 +20,7 @@ function CreatePickupLocation() {
     return (
         user_is_admin === 'true' ?
         <div>
+            <Nav></Nav>
             <Form>
                 <Form.Field>
                     <label>Pickup Locations</label>

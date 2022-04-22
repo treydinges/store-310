@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { Table, Button } from 'semantic-ui-react';
 
+import Nav from './nav';
+
 function ReadFavorite() {
   const user_id = localStorage.getItem('user_id');
   const [APIData, setAPIData] = useState([]);
@@ -28,6 +30,7 @@ function ReadFavorite() {
 
   return (
     <div>
+      <Nav></Nav>
       <Table singleLine>
         <Table.Header>
           <Table.Row>

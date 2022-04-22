@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 import ReadCategory from './readorderline';
+import Nav from './nav';
 
 
 function CreateOrderline() {
@@ -54,8 +55,8 @@ const updateAPIData = () => {
   
   
   return (
-   
     <div>
+      <Nav></Nav>
       <ReadCategory></ReadCategory>
       <br></br>
       <Form>

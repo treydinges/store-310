@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
+import Nav from './nav';
 
 function UpdatePickup() {
   let history = useHistory();
@@ -38,6 +39,7 @@ function UpdatePickup() {
 
   return (
     <div>
+      <Nav></Nav>
       <Form>
         <Form.Field>
           <label>Order ID</label>
@@ -55,8 +57,6 @@ function UpdatePickup() {
           <label>End Time</label>
           <input placeholder={pickup_end_time} onChange={(e) => set_pickup_end_time(e.target.value)}/>
         </Form.Field>
-   
-   
         <Button onClick={updateAPIData} type='submit'>Update</Button>
       </Form>
     </div>
