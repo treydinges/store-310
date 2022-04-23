@@ -471,4 +471,15 @@ router.put('/api/put/updatepickups', (req, res, next) => {
   })
 })
 
+router.put('/api/put/updateorder', (req, res, next) => {
+  const values = [ req.body.user_id
+                 ]
+  pool.query(`UPDATE orders SET is_complete = 'true'
+                WHERE user_id = $1`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
+
 module.exports = router

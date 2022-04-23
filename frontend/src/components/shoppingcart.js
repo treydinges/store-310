@@ -5,7 +5,10 @@ import { Table, Button } from 'semantic-ui-react';
 
 import Nav from './nav';
 
+import { useHistory } from 'react-router';
+
 function ShoppingCart() {
+  let history = useHistory();
   const user_id = localStorage.getItem('user_id');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
@@ -35,6 +38,15 @@ function ShoppingCart() {
       getData();
     })
   }
+
+  const onCheckout = () => {
+      axios.put('/api/put/updateorder', {
+        user_id
+      }).then(() => {
+        getData();
+      })
+      history.push('/createpickup')
+    }
 
   const getData = () => {
     axios.put('/api/get/getcart', {
@@ -86,7 +98,11 @@ function ShoppingCart() {
               </Table.Row>
           )})}
         </Table.Body>
+        <div>
+            <Button onClick={() => onCheckout()}>Checkout</Button>
+        </div>
       </Table>
+
     </div>
   )
 }
