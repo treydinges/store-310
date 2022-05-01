@@ -17,6 +17,7 @@ import axios from 'axios';
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 import Nav from './nav';
+import ViewPickupLocation from './viewpickuplocation';
 
 /*Function CreatePickup - will reference the api for creating pickup through sql 
 commands and interface with the user. The order ID, pickup location ID, start time for 
@@ -25,10 +26,8 @@ in as arguments (from the customer) to the function createpickups */
 function CreatePickup() {
     let history = useHistory();
     /*sets variables accessed later to a default empty string state*/
-    const [order_id, set_order_id] = useState('');
+    const order_id = localStorage.getItem('order_id');
     const [pickup_location_id, set_pickup_location_id] = useState('');
-    const [pickup_start_time, set_pickup_start_time] = useState('');
-    const [pickup_end_time, set_pickup_end_time] = useState('');
 
     /*function to access the api function createpickups for direct sql command 
     interaction with database. Arguments collected by inputs from user will be passed 
@@ -37,8 +36,6 @@ function CreatePickup() {
         axios.post('/api/post/createpickups', {
             order_id,
             pickup_location_id,
-            pickup_start_time,
-            pickup_end_time,
      
         }).then(() => {
             history.push('/readpickup');
@@ -49,23 +46,11 @@ function CreatePickup() {
     return (
         <div>
             <Nav></Nav>
+            <ViewPickupLocation></ViewPickupLocation>
             <Form>
-            
-                <Form.Field>
-                    <label>Order ID</label>
-                    <input placeholder='Order ID' onChange={(e) => set_order_id(e.target.value)}/>
-                </Form.Field>
                 <Form.Field>
                     <label>Pickup Location ID </label>
                     <input placeholder='Pickup Location ID' onChange={(e) => set_pickup_location_id(e.target.value)}/>
-                </Form.Field>
-                <Form.Field>
-                    <label>Pickup Start Time</label>
-                    <input placeholder='Start Time' onChange={(e) => set_pickup_start_time(e.target.value)}/>
-                </Form.Field>
-                <Form.Field>
-                    <label>Pickup End Time</label>
-                    <input placeholder='End Time' onChange={(e) => set_pickup_end_time(e.target.value)}/>
                 </Form.Field>
      
                 <Button onClick={postData} type='submit'>Submit</Button>

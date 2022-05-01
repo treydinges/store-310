@@ -5,8 +5,10 @@ import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 import Nav from './nav';
+import { useHistory } from 'react-router';
 
 function ReadItem() {
+  let history = useHistory();
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
@@ -42,6 +44,7 @@ function ReadItem() {
     user_is_admin === 'true' ?
     <div>
       <Nav></Nav>
+      <Button onClick={() => history.push('/createitem')}>Create Item</Button>
       <Table singleLine>
         <Table.Header>
           <Table.Row>

@@ -15,12 +15,6 @@ function ReadCategory() {
     getData();
   }, [])
 
-  const setData = (data) => {
-    let { category_id , category_name } = data;
-    localStorage.setItem('category_id', category_id);
-    localStorage.setItem('category_name', category_name);
-  }
-
   const getData = () => {
     axios.get('/api/get/getcategories')
     .then((response) => {
@@ -28,19 +22,9 @@ function ReadCategory() {
     }).catch((err) => console.log(err))
   }
 
-  const onDelete = (category_id) => {
-    axios.put('/api/delete/deletecategory', {
-      category_id
-    }).then(() => {
-      getData();
-    })
-  }
-
   return (
     user_is_admin === 'true' ?
     <div>
-      <Nav></Nav>
-      <Button onClick={() => history.push('/createcategory')}>Create Category</Button>
       <Table singleLine>
         <Table.Header>
           <Table.Row>
@@ -55,14 +39,6 @@ function ReadCategory() {
               <Table.Row>
                 <Table.Cell>{data.category_id}</Table.Cell>
                 <Table.Cell>{data.category_name}</Table.Cell>
-                <Link to='/updatecategory'>
-                  <Table.Cell> 
-                    <Button onClick={() => setData(data)}>Update</Button>
-                  </Table.Cell>
-                </Link>
-                <Table.Cell>
-                  <Button onClick={() => onDelete(data.category_id)}>Delete</Button>
-                </Table.Cell>
               </Table.Row>
           )})}
         </Table.Body>

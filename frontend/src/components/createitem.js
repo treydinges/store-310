@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
-import ReadCategory from './readcategory';
+import ViewCategory from './viewcategory';
 import Nav from './nav';
 
 function CreateItem() {
@@ -31,7 +31,7 @@ function CreateItem() {
     user_is_admin === 'true' ?
     <div>
       <Nav></Nav>
-      <ReadCategory></ReadCategory>
+      <ViewCategory></ViewCategory>
       <br></br>
       <Form>
         <Form.Field>

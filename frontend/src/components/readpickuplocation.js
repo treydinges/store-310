@@ -17,11 +17,13 @@ import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 import Nav from './nav';
+import { useHistory } from 'react-router';
 
 /*Function ReadPickupLocation - will reference the api for a getpickuplocations 
 through sql commands through the getData function to retrieve all the values in
  the entity pickups */
 function ReadPickupLocation() {
+  let history = useHistory();
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
@@ -64,6 +66,7 @@ from user input and then deleted*/
     user_is_admin === 'true' ?
     <div>
       <Nav></Nav>
+      <Button onClick={() => history.push('/createpickuplocation')}>Create Pickup Location</Button>
       <Table singleLine>
         <Table.Header>
           <Table.Row>

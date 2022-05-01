@@ -72,8 +72,6 @@ from user input and then deleted*/
             <Table.HeaderCell>Pickup Location ID</Table.HeaderCell>
             <Table.HeaderCell>Pickup Start Time</Table.HeaderCell>
             <Table.HeaderCell>Pickup End Time</Table.HeaderCell>
-            <Table.HeaderCell>Pickup fk 1</Table.HeaderCell>
-            <Table.HeaderCell>Pickup fk 2</Table.HeaderCell>
 
           </Table.Row>
         </Table.Header>
@@ -87,8 +85,6 @@ from user input and then deleted*/
                 <Table.Cell>{data.pickup_location_id}</Table.Cell>
                 <Table.Cell>{data.pickup_start_time}</Table.Cell>
                 <Table.Cell>{data.pickup_end_time}</Table.Cell>
-                <Table.Cell>{data.pickup_fk1}</Table.Cell>
-                <Table.Cell>{data.pickup_fk2}</Table.Cell>
                 <Link to='/updatepickups'>
                   <Table.Cell> 
                     <Button onClick={() => setData(data)}>Update</Button>

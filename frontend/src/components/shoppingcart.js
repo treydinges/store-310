@@ -40,13 +40,36 @@ function ShoppingCart() {
   }
 
   const onCheckout = () => {
-      axios.put('/api/put/updateorder', {
-        user_id
-      }).then(() => {
-        getData();
-      })
-      history.push('/createpickup')
-    }
+    axios.put('/api/get/getcart', {
+      user_id
+    }).then((response) => {
+      if (response.data[0]) {
+        let order_id = response.data[0].order_id;
+        localStorage.setItem('order_id', order_id);
+        console.log(order_id);
+        axios.put('/api/put/updateorder', {
+          user_id,
+          order_id
+        }).then(() => {
+          // update qoh of each item in the order lines
+          axios.put('/api/get/getorderlinequantites', {
+            order_id
+          }).then((response) => {
+            response.data.forEach(element => {
+              let item_id = element.item_id;
+              let item_quantity = element.item_quantity;
+              axios.put('/api/put/updateitemqoh', {
+                item_id,
+                item_quantity
+              }).then(() => {
+              })
+            });
+            history.push('/createpickup')
+          })
+        })
+      }
+    }).catch((err) => console.log(err))
+  }
 
   const getData = () => {
     axios.put('/api/get/getcart', {

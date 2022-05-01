@@ -21,7 +21,7 @@ function CreateUser() {
       user_password,
       user_is_admin,
     }).then(() => {
-      history.push('/readuser');
+      history.push('/login');
     }).catch((err) => console.log(err))
   }
 
