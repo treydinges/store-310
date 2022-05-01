@@ -20,6 +20,7 @@ function Nav() {
         <span>
           <Button onClick={() => history.push('/shoppingcart')}>Shopping Cart</Button>
           <Button onClick={() => signOut()}>Sign Out</Button>
+          <Button onClick={() => history.push('/updateuser')}>Update User Details</Button>
           <Button onClick={() => history.push('/readfavorite')}>Favorites</Button>
           <Button onClick={() => history.push('/readorder')}>Previous Orders</Button>
         </span>

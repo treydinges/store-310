@@ -8,7 +8,6 @@ import ShoppingCart from './components/shoppingcart';
 
 import CreateUser from './components/createuser';
 import UpdateUser from './components/updateuser';
-import ReadUser from './components/readuser';
 
 import CreateCategory from './components/createcategory';
 import UpdateCategory from './components/updatecategory';
@@ -18,14 +17,9 @@ import CreateItem from './components/createitem';
 import UpdateItem from './components/updateitem';
 import ReadItem from './components/readitem';
 
-import CreateFavorite from './components/createfavorite';
 import ReadFavorite from './components/readfavorite';
 
-import CreateOrderline from './components/createorderline';
-import ReadOrderline from './components/readorderline';
-
 import CreateOrder from './components/createorder';
-import UpdateOrder from './components/updateorder';
 import ReadOrder from './components/readorder';
 
 import CreatePickupLocation from './components/createpickuplocation';
@@ -48,7 +42,6 @@ function App() {
 
           <Route exact path='/createuser' component={CreateUser} />
           <Route exact path='/updateuser' component={UpdateUser} />
-          <Route exact path='/readuser' component={ReadUser} />
 
           <Route exact path='/createcategory' component={CreateCategory} />
           <Route exact path='/updatecategory' component={UpdateCategory} />
@@ -58,14 +51,9 @@ function App() {
           <Route exact path='/updateitem' component={UpdateItem} />
           <Route exact path='/readitem' component={ReadItem} />
 
-          <Route exact path='/createfavorite' component={CreateFavorite} />
           <Route exact path='/readfavorite' component={ReadFavorite} />
 
-          <Route exact path='/createorderline' component={CreateOrderline} />
-          <Route exact path='/readorderline' component={ReadOrderline} />
-
           <Route exact path='/createorder' component={CreateOrder} />
-          <Route exact path='/updateorder' component={UpdateOrder} />
           <Route exact path='/readorder' component={ReadOrder} />
 
           <Route exact path='/createpickuplocation' component={CreatePickupLocation} />

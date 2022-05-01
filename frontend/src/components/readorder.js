@@ -12,8 +12,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Table, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+import { Table } from 'semantic-ui-react'
 
 import Nav from './nav';
 
@@ -29,12 +28,12 @@ function ReadOrder() {
  
 /*sets local stoarage variables (accessed later) to a set of passed in arguments 
   - all the order entity attributes used for later display*/
-  const setData = (data) => {
-    let { order_id , user_id, order_datetime } = data;
-    localStorage.setItem('order_id', order_id);
-    localStorage.setItem('user_id', user_id);
-    localStorage.setItem('order_datetime', order_datetime);
-}
+//   const setData = (data) => {
+//     let { order_id , user_id, order_datetime } = data;
+//     localStorage.setItem('order_id', order_id);
+//     localStorage.setItem('user_id', user_id);
+//     localStorage.setItem('order_datetime', order_datetime);
+// }
 
 /*Function getData - will reference the api for a getorders through sql 
   commands. The order ID, user id, and order datetime for all 
@@ -51,13 +50,13 @@ function ReadOrder() {
   /*Function onDelete - will reference the api for a deleteorder through sql 
 commands and interface with the user. The order ID (primary key) will be taken 
 from user input and then deleted*/
-  const onDelete = (order_id) => {
-    axios.put('/api/delete/deleteorder', {
-        order_id
-    }).then(() => {
-      getData();
-    })
-  }
+  // const onDelete = (order_id) => {
+  //   axios.put('/api/delete/deleteorder', {
+  //       order_id
+  //   }).then(() => {
+  //     getData();
+  //   })
+  // }
 
   /*returns the js code for displaying the inputs and processing the data to view all
     established order entity instances. Also has buttons linked to updating 

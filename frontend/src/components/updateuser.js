@@ -8,7 +8,7 @@ import Nav from './nav';
 
 function UpdateUser() {
   let history = useHistory();
-  const [user_id, set_user_id] = useState(null);
+  const user_id = localStorage.getItem('user_id');
   const [user_fname, set_user_fname] = useState('');
   const [user_lname, set_user_lname] = useState('');
   const [user_phone, set_user_phone] = useState('');
@@ -16,12 +16,15 @@ function UpdateUser() {
   const [user_is_admin, set_user_is_admin] = useState('false');
 
   useEffect(() => {
-    set_user_id(localStorage.getItem('user_id'));
-    set_user_fname(localStorage.getItem('user_fname'));
-    set_user_lname(localStorage.getItem('user_lname'));
-    set_user_phone(localStorage.getItem('user_phone'));
-    set_user_password(localStorage.getItem('user_password'));
-    set_user_is_admin(localStorage.getItem('user_is_admin'));
+    axios.put('/api/get/getusers', {
+      user_id
+    }).then((response) => {
+      set_user_fname(response.data[0].user_fname);
+      set_user_lname(response.data[0].user_lname);
+      set_user_phone(response.data[0].user_phone);
+      set_user_password(response.data[0].user_password);
+      set_user_is_admin(response.data[0].user_is_admin);
+    }).catch((err) => console.log(err))
   }, []);
 
   const updateAPIData = () => {
@@ -33,7 +36,7 @@ function UpdateUser() {
       user_password,
       user_is_admin,
     }).then(() => {
-      history.push('/readuser');
+      history.push('/');
     }).catch((err) => console.log(err))
   }
 

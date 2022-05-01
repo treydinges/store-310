@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Table, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
-
-import Nav from './nav';
-import { useHistory } from 'react-router';
+import { Table } from 'semantic-ui-react'
 
 function ViewPickupLocation() {
-  let history = useHistory();
-  const user_is_admin = localStorage.getItem('user_is_admin');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();

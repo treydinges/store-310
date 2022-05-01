@@ -348,9 +348,11 @@ router.put('/api/delete/deletecategory', (req, res, next) => {
 })
 
 // user queries
-router.get('/api/get/getusers', (req, res, next ) => {
-  pool.query(`SELECT * FROM users 
-              ORDER BY user_id DESC`, 
+router.put('/api/get/getusers', (req, res, next ) => {
+  const user_id = req.body.user_id
+  pool.query(`SELECT * FROM users
+              WHERE user_id = $1
+              ORDER BY user_id DESC`, [ user_id ],
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows);
