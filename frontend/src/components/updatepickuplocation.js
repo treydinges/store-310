@@ -1,16 +1,15 @@
 /* ----------------------------------------------------------------------------------
-    -Team Number: Team 16
-    -Project: Grocery Store Database and UI
-    -Page was coded by: Sunhee Kim
-    -Purpose of this Page: 
-        The entity pickup location is tied to a users orders through the bridge 
-        entity called pickups. A pickup location can be created by an admin to provide
-        more spots for customer order pickups. The customer would not have access to
-        an update pickup location feature. This script will allow an admin to edit 
-        a created instance of a pickup location for users to later view as options 
-        at checkout.
-
-   --------------------------------------------------------------------------------*/
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: Sunhee Kim
+  -Purpose of this Page: 
+    The entity pickup location is tied to a users orders through the bridge 
+    entity called pickups. A pickup location can be created by an admin to provide
+    more spots for customer order pickups. The customer would not have access to
+    an update pickup location feature. This script will allow an admin to edit 
+    a created instance of a pickup location for users to later view as options 
+    at checkout.
+--------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';

@@ -1,11 +1,17 @@
+/* ----------------------------------------------------------------------------------
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: 
+  -Purpose of this Page: 
+--------------------------------------------------------------------------------*/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { Table, Button } from 'semantic-ui-react';
+import { useHistory } from 'react-router';
 
 import Nav from './nav';
-
-import { useHistory } from 'react-router';
 
 function ShoppingCart() {
   let history = useHistory();
@@ -46,7 +52,6 @@ function ShoppingCart() {
       if (response.data[0]) {
         let order_id = response.data[0].order_id;
         localStorage.setItem('order_id', order_id);
-        console.log(order_id);
         axios.put('/api/put/updateorder', {
           user_id,
           order_id

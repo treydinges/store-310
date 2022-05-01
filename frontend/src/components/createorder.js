@@ -1,19 +1,20 @@
 /* ----------------------------------------------------------------------------------
-    -Team Number: Team 16
-    -Project: Grocery Store Database and UI
-    -Page was coded by: Sunhee Kim
-    -Purpose of this Page: 
-        A database entity order instance can be created by a customer and added to 
-        the database at checkout.  This script will allow a customer to create 
-        an order, with a bridging entity orderline used to establish a relationship 
-        between the order and items the customer wishes to checkout. The admin would 
-        not have access to this functionality.
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: Sunhee Kim
+  -Purpose of this Page: 
+    A database entity order instance can be created by a customer and added to 
+    the database at checkout.  This script will allow a customer to create 
+    an order, with a bridging entity orderline used to establish a relationship 
+    between the order and items the customer wishes to checkout. The admin would 
+    not have access to this functionality.
 --------------------------------------------------------------------------------*/
 import React, { useState } from 'react';
 import axios from 'axios';
 
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
+
 import ReadOrder from './readorder';
 import Nav from './nav';
 

@@ -1,12 +1,11 @@
 /* ----------------------------------------------------------------------------------
-    -Team Number: Team 16
-    -Project: Grocery Store Database and UI
-    -Page was coded by: Sunhee Kim
-    -Purpose of this Page: 
-        A database entity order instance can be created by a customer and added  
-        to the database at checkout.  This script will allow an admin to view
-       all instances of customer orders that have been logged in the database
-
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: Sunhee Kim
+  -Purpose of this Page: 
+    A database entity order instance can be created by a customer and added  
+    to the database at checkout.  This script will allow an admin to view
+    all instances of customer orders that have been logged in the database
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';

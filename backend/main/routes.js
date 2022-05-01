@@ -3,7 +3,12 @@ var router = express.Router()
 var pool = require('./db')
 
 
-// login query
+/* --------------------------------------------------------------------------
+ * the following queries were written by Charles Dinges
+-----------------------------------------------------------------------------*/
+
+// log in to the system given a phone number and password,
+// returns the user id and admin status of the given user (if the login was successful)
 router.put('/api/get/userlogin', (req, res, next ) => {
   const values = [ req.body.user_phone,
                    req.body.user_password,
@@ -17,7 +22,7 @@ router.put('/api/get/userlogin', (req, res, next ) => {
   })
 })
 
-// item queries
+// gets all details of all items in the system
 router.get('/api/get/getitems', (req, res, next ) => {
   pool.query(`SELECT * FROM items
               ORDER BY item_id DESC`,
@@ -27,6 +32,7 @@ router.get('/api/get/getitems', (req, res, next ) => {
   })
 })
 
+// gets all details of all items in the system
 router.post('/api/post/createitem', (req, res, next) => {
   const values = [ req.body.category_id,
                    req.body.item_name,
@@ -42,6 +48,7 @@ router.post('/api/post/createitem', (req, res, next) => {
   })
 })
 
+// updates the item with the given id with the supplied information from the api call
 router.put('/api/put/updateitem', (req, res, next) => {
   const values = [ req.body.item_id,
                    req.body.category_id,
@@ -58,6 +65,7 @@ router.put('/api/put/updateitem', (req, res, next) => {
   })
 })
 
+// updates the given item's quantity on hand count, this is used during checkout
 router.put('/api/put/updateitemqoh', (req, res, next) => {
   const values = [ req.body.item_id,
                    req.body.item_quantity,
@@ -70,17 +78,7 @@ router.put('/api/put/updateitemqoh', (req, res, next) => {
   })
 })
 
-router.put('/api/put/decrementitem', (req, res, next) => {
-  const values = [ req.body.item_id
-                 ]
-  pool.query(`UPDATE items SET item_qoh = (item_qoh - 1)
-              WHERE item_id = $1`, values,
-    (q_err, q_res) => {
-      if(q_err) return next(q_err);
-      res.json(q_res.rows);
-  })
-})
-
+// delete the item with the given id from the system
 router.put('/api/delete/deleteitem', (req, res, next) => {
   const item_id = req.body.item_id
   pool.query(`DELETE FROM items WHERE item_id = $1`, [ item_id ],
@@ -90,7 +88,8 @@ router.put('/api/delete/deleteitem', (req, res, next) => {
   })
 })
 
-// order queries
+// get the shopping cart id for the given user
+// a shopping cart is an order that has not yet been completed
 router.put('/api/get/getcart', (req, res, next ) => {
   const values = [ req.body.user_id,
                  ]
@@ -105,6 +104,7 @@ router.put('/api/get/getcart', (req, res, next ) => {
   })
 })
 
+// gets all details of all orders by the given user in the system
 router.put('/api/get/getorders', (req, res, next ) => {
   const values = [ req.body.user_id,
                  ]
@@ -118,6 +118,7 @@ router.put('/api/get/getorders', (req, res, next ) => {
   })
 })
 
+// create an empty order for a given customer
 router.post('/api/post/createorder', (req, res, next) => {
   const values = [ req.body.user_id,
                    'false'
@@ -130,6 +131,7 @@ router.post('/api/post/createorder', (req, res, next) => {
   })
 })
 
+// set the given order to be completed, moving it from a shopping cart to an order
 router.put('/api/put/completeorder', (req, res, next) => {
   const values = [ req.body.order_id,
                  ]
@@ -141,6 +143,7 @@ router.put('/api/put/completeorder', (req, res, next) => {
   })
 })
 
+// delete the given order
 router.put('/api/delete/deleteorder', (req, res, next) => {
   const order_id = req.body.order_id
   pool.query(`DELETE FROM orders WHERE order_id = $1`, [ order_id ],
@@ -150,7 +153,7 @@ router.put('/api/delete/deleteorder', (req, res, next) => {
   })
 })
 
-// items_users queries
+// get all of the favorites for the specified user
 router.put('/api/get/getfavorites', (req, res, next ) => {
   const values = [ req.body.user_id,
                  ]
@@ -165,6 +168,7 @@ router.put('/api/get/getfavorites', (req, res, next ) => {
   })
 })
 
+// used to check if the specified user / item combination is already in the table
 router.put('/api/get/getfavorite', (req, res, next ) => {
   const values = [ req.body.user_id,
                    req.body.item_id,
@@ -179,6 +183,7 @@ router.put('/api/get/getfavorite', (req, res, next ) => {
   })
 })
 
+// add the user / item combination to the favorites table
 router.post('/api/post/createfavorite', (req, res, next) => {
   const values = [ req.body.user_id,
                    req.body.item_id,
@@ -191,6 +196,7 @@ router.post('/api/post/createfavorite', (req, res, next) => {
   })
 })
 
+// delete the given favortie from the bridge entity
 router.put('/api/delete/deletefavorite', (req, res, next) => {
   const item_user_id = req.body.item_user_id
   pool.query(`DELETE FROM items_users WHERE item_user_id = $1`, [ item_user_id ],
@@ -200,7 +206,7 @@ router.put('/api/delete/deletefavorite', (req, res, next) => {
   })
 })
 
-// orderline queries
+// get all of the item details and orderline details for a given order
 router.put('/api/get/getorderlines', (req, res, next ) => {
   const values = [ req.body.order_id,
                  ]
@@ -215,6 +221,9 @@ router.put('/api/get/getorderlines', (req, res, next ) => {
   })
 })
 
+// get all of the item quantities all of the orderlines in the given order
+// these number will later be subtracted from the item_qoh to get the new quantity
+// on hand after an order has been checked out
 router.put('/api/get/getorderlinequantites', (req, res, next ) => {
   const values = [ req.body.order_id,
                  ]
@@ -229,6 +238,10 @@ router.put('/api/get/getorderlinequantites', (req, res, next ) => {
   })
 })
 
+// get the details of all of the orderline and item for the given order and item combination
+// this is used to determine if the given combination already exists. If the item is already in
+// an order, we just want to increment the item_quantity within the order, otherwise we will create
+// a new orderline with the item for this order.
 router.put('/api/get/getorderline', (req, res, next ) => {
   const values = [ req.body.order_id,
                    req.body.item_id
@@ -245,6 +258,7 @@ router.put('/api/get/getorderline', (req, res, next ) => {
   })
 })
 
+// creates an orderline given an item id and order id
 router.post('/api/post/createorderline', (req, res, next) => {
   const values = [ req.body.item_id,
                    req.body.order_id,
@@ -257,22 +271,8 @@ router.post('/api/post/createorderline', (req, res, next) => {
   })
 })
 
-router.put('/api/put/updateorderline', (req, res, next) => {
-  const values = [ req.body.orderline_id,
-                   req.body.item_id,
-                   req.body.item_quantity
-                 ]
-  pool.query(`UPDATE orderline SET item_quantity = $3
-              WHERE orderline_id = $1;
-              
-              UPDATE items SET item_qoh = (item_qoh - $3)
-              WHERE item_id = $2`, values,
-    (q_err, q_res) => {
-      if(q_err) return next(q_err);
-      res.json(q_res.rows);
-  })
-})
-
+// used to increment the item_quantity in a given orderline, this is used in
+// the shopping cart and is connected to the "+" button
 router.put('/api/put/incrementorderline', (req, res, next) => {
   const values = [ req.body.orderline_id,
                  ]
@@ -284,6 +284,8 @@ router.put('/api/put/incrementorderline', (req, res, next) => {
   })
 })
 
+// used to decrement the item_quantity in a given orderline, this is used in
+// the shopping cart and is connected to the "-" button
 router.put('/api/put/decrementorderline', (req, res, next) => {
   const values = [ req.body.orderline_id,
                  ]
@@ -295,6 +297,8 @@ router.put('/api/put/decrementorderline', (req, res, next) => {
   })
 })
 
+// deletes the given orderline from the table, connected to the "remove"
+// button in the shopping cart
 router.put('/api/delete/deleteorderline', (req, res, next) => {
   const values = [ req.body.orderline_id,
                  ]
@@ -305,7 +309,7 @@ router.put('/api/delete/deleteorderline', (req, res, next) => {
   })
 })
 
-// category queries
+// get all of the categories in the table
 router.get('/api/get/getcategories', (req, res, next ) => {
   pool.query(`SELECT * FROM categories 
               ORDER BY category_id DESC`, 
@@ -315,6 +319,7 @@ router.get('/api/get/getcategories', (req, res, next ) => {
   })
 })
 
+// create a category with the given name
 router.post('/api/post/createcategory', (req, res, next) => {
   const values = [ req.body.category_name,
                  ]
@@ -326,6 +331,7 @@ router.post('/api/post/createcategory', (req, res, next) => {
   })
 })
 
+// update the given category with the requested name
 router.put('/api/put/updatecategory', (req, res, next) => {
   const values = [ req.body.category_id,
                    req.body.category_name,
@@ -338,6 +344,7 @@ router.put('/api/put/updatecategory', (req, res, next) => {
   })
 })
 
+// delete the given category from the table
 router.put('/api/delete/deletecategory', (req, res, next) => {
   const category_id = req.body.category_id
   pool.query(`DELETE FROM categories WHERE category_id = $1`, [ category_id ],
@@ -347,7 +354,8 @@ router.put('/api/delete/deletecategory', (req, res, next) => {
   })
 })
 
-// user queries
+// gets the details of the specified user, used to pre-fill the
+// table within the updateuser component
 router.put('/api/get/getusers', (req, res, next ) => {
   const user_id = req.body.user_id
   pool.query(`SELECT * FROM users
@@ -359,6 +367,7 @@ router.put('/api/get/getusers', (req, res, next ) => {
   })
 })
 
+// creates a user with the given credentials
 router.post('/api/post/createuser', (req, res, next) => {
   const values = [ req.body.user_fname,
                    req.body.user_lname,
@@ -374,6 +383,7 @@ router.post('/api/post/createuser', (req, res, next) => {
   })
 })
 
+// updates the given user with the requested credentials
 router.put('/api/put/updateuser', (req, res, next) => {
   const values = [ req.body.user_id,
                    req.body.user_fname, 
@@ -390,6 +400,7 @@ router.put('/api/put/updateuser', (req, res, next) => {
   })
 })
 
+// deletes the specified user from the table
 router.put('/api/delete/deleteuser', (req, res, next) => {
   const user_id = req.body.user_id
   pool.query(`DELETE FROM users WHERE user_id = $1`, [ user_id ],
@@ -398,6 +409,11 @@ router.put('/api/delete/deleteuser', (req, res, next) => {
       res.json(q_res.rows);
   })
 })
+
+/* --------------------------------------------------------------------------
+ * end queries written by Charles Dinges
+-----------------------------------------------------------------------------*/
+
 /* --------------------------------------------------------------------------
 Section was coded by: Sunhee Kim
 comment: establishes the api get command getpickuplocations which retrieves the pickup locations

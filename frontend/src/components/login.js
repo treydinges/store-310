@@ -1,8 +1,16 @@
+/* ----------------------------------------------------------------------------------
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: 
+  -Purpose of this Page: 
+--------------------------------------------------------------------------------*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
 
 import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
+
 import Nav from './nav';
 
 function Login() {

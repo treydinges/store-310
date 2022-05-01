@@ -1,23 +1,23 @@
 /* ----------------------------------------------------------------------------------
-    -Team Number: Team 16
-    -Project: Grocery Store Database and UI
-    -Page was coded by: Sunhee Kim
-    -Purpose of this Page: 
-        The entity pickup location is tied to a users orders through the bridge 
-        entity called pickups. A pickup location can be created by an admin to provide
-        more spots for customer order pickups. This script will allow a customer to 
-        view all instances of a pickup locations for the user to select as pickup 
-        options at checkout of an order.
-
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: Sunhee Kim
+  -Purpose of this Page: 
+    The entity pickup location is tied to a users orders through the bridge 
+    entity called pickups. A pickup location can be created by an admin to provide
+    more spots for customer order pickups. This script will allow a customer to 
+    view all instances of a pickup locations for the user to select as pickup 
+    options at checkout of an order.
 --------------------------------------------------------------------------------*/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 import Nav from './nav';
-import { useHistory } from 'react-router';
 
 /*Function ReadPickupLocation - will reference the api for a getpickuplocations 
 through sql commands through the getData function to retrieve all the values in

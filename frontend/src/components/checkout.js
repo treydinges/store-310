@@ -1,3 +1,10 @@
+/* ----------------------------------------------------------------------------------
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: 
+  -Purpose of this Page: 
+--------------------------------------------------------------------------------*/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -5,7 +12,6 @@ import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 import Nav from './nav';
-
 
 function Checkout() {
   const [APIData, setAPIData] = useState([]);
@@ -25,7 +31,6 @@ function Checkout() {
       <Nav></Nav>
       <Table singleLine>
         <Table.Header>
-          <header>CHECKOUT PAGE</header>
         <Table.Row>
           <Table.HeaderCell>Pickup Location ID</Table.HeaderCell>
           <Table.HeaderCell>Pickup Location Parking Spot</Table.HeaderCell>

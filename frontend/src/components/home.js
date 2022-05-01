@@ -1,3 +1,10 @@
+/* ----------------------------------------------------------------------------------
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: 
+  -Purpose of this Page: 
+--------------------------------------------------------------------------------*/
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -73,13 +80,6 @@ function Home() {
         }).catch((err) => console.log(err))
       }
     }).catch((err) => console.log(err))
-
-    // // subtract from the item qoh
-    // axios.put('/api/put/decrementitem', {
-    //   item_id
-    // }).then(() => {
-    //   console.log("decremented item_qoh");
-    // }).catch((err) => console.log(err))
   }
 
   const addToFavorites = (item_id) => {

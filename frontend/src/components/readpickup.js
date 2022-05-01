@@ -1,13 +1,13 @@
 /* ----------------------------------------------------------------------------------
-    -Team Number: Team 16
-    -Project: Grocery Store Database and UI
-    -Page was coded by: Sunhee Kim
-    -Purpose of this Page: 
-        The entity pickup location is tied to a users orders through the bridge 
-        entity called pickups. This script will allow the user to view the entries 
-        of the entity pickup. This was mainly used for 
-        testing purposes to ensure the pickups entity of the database was setup 
-        correctly and functional in all commands.
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: Sunhee Kim
+  -Purpose of this Page: 
+    The entity pickup location is tied to a users orders through the bridge 
+    entity called pickups. This script will allow the user to view the entries 
+    of the entity pickup. This was mainly used for 
+    testing purposes to ensure the pickups entity of the database was setup 
+    correctly and functional in all commands.
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';
@@ -17,6 +17,7 @@ import { Table, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 import Nav from './nav';
+
 /*Function ReadPickup - will reference the api for a getpickup through sql 
 commands through the getData function to retrieve all the values in the entity pickups */
 function ReadPickup() {

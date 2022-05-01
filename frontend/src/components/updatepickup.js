@@ -1,15 +1,14 @@
 /* ----------------------------------------------------------------------------------
-    -Team Number: Team 16
-    -Project: Grocery Store Database and UI
-    -Page was coded by: Sunhee Kim
-    -Purpose of this Page: 
-        The entity pickup location is tied to a users orders through the bridge 
-        entity called pickups. This script will allow the user to edit the values 
-        from a previously created instance of pickup. This was mainly used for 
-        testing purposes to ensure the pickups entity of the database was setup 
-        correctly and functional in all commands.
-
-   --------------------------------------------------------------------------------*/
+  -Team Number: Team 16
+  -Project: Grocery Store Database and UI
+  -Page was coded by: Sunhee Kim
+  -Purpose of this Page: 
+    The entity pickup location is tied to a users orders through the bridge 
+    entity called pickups. This script will allow the user to edit the values 
+    from a previously created instance of pickup. This was mainly used for 
+    testing purposes to ensure the pickups entity of the database was setup 
+    correctly and functional in all commands.
+--------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -18,6 +17,7 @@ import { Button, Form } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 
 import Nav from './nav';
+
 /*Function UpdatePickup - will reference the api for a created pickup through sql 
 commands and interface with the user. The pickup ID, order ID, pickup location ID, start time for 
 pickup, and end time for pickup will all be reentered as js inputs by user and passed 
