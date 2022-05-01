@@ -17,7 +17,7 @@ function ViewPickupLocation() {
   }, [])
 
   const getData = () => {
-    axios.get('/api/get/getpickuplocations')
+    axios.get('/api/get/getopenpickuplocations')
     .then((response) => {
       setAPIData(response.data);
     }).catch((err) => console.log(err))

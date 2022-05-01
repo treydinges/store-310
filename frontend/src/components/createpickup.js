@@ -36,7 +36,6 @@ function CreatePickup() {
     axios.post('/api/post/createpickups', {
       order_id,
       pickup_location_id,
-  
     }).then(() => {
       history.push('/readpickup');
     }).catch((err) => console.log(err))

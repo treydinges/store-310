@@ -410,6 +410,24 @@ router.put('/api/delete/deleteuser', (req, res, next) => {
   })
 })
 
+// gets all currently available pickup locations
+// first find all pickup locations that are currently occupied and then
+// excludes all pickup locations that appear in that list
+router.get('/api/get/getopenpickuplocations', (req, res, next ) => {
+  pool.query(`select pl.pickup_location_id, pl.pickup_location_parking_spot
+              from pickup_locations pl left join pickups p
+              on pl.pickup_location_id = p.pickup_location_id
+              where pl.pickup_location_id not in
+              (select pickup_location_id
+              from pickups
+              where NOW() between pickup_start_time and pickup_end_time)
+              ORDER BY pickup_location_id DESC`, 
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
+
 /* --------------------------------------------------------------------------
  * end queries written by Charles Dinges
 -----------------------------------------------------------------------------*/
