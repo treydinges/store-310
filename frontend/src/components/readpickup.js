@@ -21,6 +21,7 @@ import Nav from './nav';
 /*Function ReadPickup - will reference the api for a getpickup through sql 
 commands through the getData function to retrieve all the values in the entity pickups */
 function ReadPickup() {
+  const user_id = localStorage.getItem('user_id');
   const [APIData, setAPIData] = useState([]);
   useEffect(() => {
     getData();
@@ -44,8 +45,9 @@ function ReadPickup() {
   pickup, and end time for all existing values in the entity pickup will 
   be displayed as outputs for the user to view */
   const getData = () => {
-    axios.get('/api/get/getpickups')
-    .then((response) => {
+    axios.put('/api/get/getpickups', {
+      user_id
+    }).then((response) => {
       setAPIData(response.data);
     }).catch((err) => console.log(err))
   }
@@ -86,7 +88,7 @@ from user input and then deleted*/
                 <Table.Cell>{data.pickup_location_id}</Table.Cell>
                 <Table.Cell>{data.pickup_start_time}</Table.Cell>
                 <Table.Cell>{data.pickup_end_time}</Table.Cell>
-                <Link to='/updatepickups'>
+                <Link to='/updatepickup'>
                   <Table.Cell> 
                     <Button onClick={() => setData(data)}>Update</Button>
                   </Table.Cell>

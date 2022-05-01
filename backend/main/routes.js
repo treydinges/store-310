@@ -476,9 +476,13 @@ available for the store. Function will query the sql command to select all the o
 pickuplocation combinations listed in the database determined by the system assigned priamry key. 
 A customer could use this command to view their past orders.
 -----------------------------------------------------------------------------*/
-router.get('/api/get/getpickups', (req, res, next ) => {
-  pool.query(`SELECT * FROM pickups 
-              ORDER BY pickup_id DESC`, 
+router.put('/api/get/getpickups', (req, res, next ) => {
+  const user_id = req.body.user_id
+  pool.query(`SELECT *
+              FROM pickups p join orders o
+              on p.order_id = o.order_id
+              where user_id = $1
+              ORDER BY pickup_id DESC`, [ user_id ],
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows);
