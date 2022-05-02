@@ -1,8 +1,9 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Nathaniel Wang
+  -Purpose of this Page: The purpose of this page is for the users
+    to view the categories
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';
