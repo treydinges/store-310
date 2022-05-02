@@ -354,6 +354,19 @@ router.put('/api/delete/deletecategory', (req, res, next) => {
   })
 })
 
+//select * from orders o join pickups pl  on o.order_id = pl.order_id where user_id = 8; 
+router.get('/api/get/getuserpickups', (req, res, next ) => {
+  const user_id = req.body.user_id
+  pool.query(`select * from orders o join 
+             pickups pl  on o.order_id = 
+             pl.order_id order by user_id`, 
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+
+})
+
 // gets the details of the specified user, used to pre-fill the
 // table within the updateuser component
 router.put('/api/get/getusers', (req, res, next ) => {

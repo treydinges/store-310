@@ -30,6 +30,8 @@ import CreatePickup from './components/createpickup';
 import UpdatePickup from './components/updatepickup';
 import ReadPickup from './components/readpickup';
 
+import ReadUserPickups from './components/readuserpickups';
+
 
 function App() {
   return (
@@ -63,6 +65,8 @@ function App() {
           <Route exact path='/createpickup' component={CreatePickup} />
           <Route exact path='/updatepickup' component={UpdatePickup} />
           <Route exact path='/readpickup' component={ReadPickup} />
+
+          <Route exact path='/readuserpickups' component={ReadUserPickups} />
         </div>
     </Router>
   );
