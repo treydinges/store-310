@@ -52,6 +52,8 @@ function ReadItem() {
     <div>
       <Nav></Nav>
       <Button onClick={() => history.push('/createitem')}>Create Item</Button>
+      <Button onClick={() => history.push('/getitembyname')}>Search Item by name</Button>
+      <Button onClick={() => history.push('/getitembycategory')}>Search Item by category</Button>
       <Table singleLine>
         <Table.Header>
           <Table.Row>
