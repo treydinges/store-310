@@ -1,8 +1,11 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Charles Dinges
+  -Purpose of this Page:
+    Shows all of the items available to buy in the store. Shows item details as well
+    as links to add the items to the shopping cart or list of favorites. This page
+    is only shown to users who log in to their accounts.
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';
@@ -19,6 +22,7 @@ function Home() {
     getData();
   }, [])
 
+  // API call to get all of the item data in the store
   const getData = () => {
     axios.get('/api/get/getitems')
     .then((response) => {
@@ -26,6 +30,13 @@ function Home() {
     }).catch((err) => console.log(err))
   }
 
+  // adds the given item to the user's cart
+  // first there is an API call to get the current user's cart
+  // if there user does not have a cart, a cart is created in the database, and then the id of that cart is set locally
+  // if the user alread has a cart, we set the id of that cart so we can add the item
+  //
+  // if the item is already in the cart, the item quantity in the orderline is incremented
+  // if the item is not in the cart the orderline is created for the given cart id and item
   const addToCart = (item_id) => {
     // get the cart for the current user (if there is one)
     axios.put('/api/get/getcart', {
@@ -82,6 +93,9 @@ function Home() {
     }).catch((err) => console.log(err))
   }
 
+  // adds the item to the user's favorites
+  // to avoid duplicates, there is first an API call to see if the item is already in the favorites
+  // if it is not already there, we create an entry in the database for the user and item combo
   const addToFavorites = (item_id) => {
     // check if the item is already in the users favorites
     // if it is, do nothing, otherwise add it to the favorties
@@ -102,6 +116,7 @@ function Home() {
     }).catch((err) => console.log(err))
   }
 
+  // conditionally render items available to buy with links to add to cart and add to favorites
   return (
     user_id !== 'null' ?
     <div>

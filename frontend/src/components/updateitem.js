@@ -1,8 +1,12 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Charles Dinges
+  -Purpose of this Page:
+    Updates an item with the parameters given in the form. This page is only accessible
+    by a user with admin permissions. Once the item detiails are to the user's liking, 
+    they can press the submit button which will call the API and update the item 
+    within the database.
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';
@@ -16,6 +20,7 @@ import Nav from './nav';
 function UpdateItem() {
   const user_is_admin = localStorage.getItem('user_is_admin');
   let history = useHistory();
+  // item parameters to send to the API
   const [item_id, set_item_id] = useState(null);
   const [category_id, set_category_id] = useState(null);
   const [item_name, set_item_name] = useState('');
@@ -24,6 +29,7 @@ function UpdateItem() {
   const [item_description, set_item_description] = useState('');
 
   useEffect(() => {
+    // used to figure out which item needs to be updated
     set_item_id(localStorage.getItem('item_id'));
     set_category_id(localStorage.getItem('category_id'));
     set_item_name(localStorage.getItem('item_name'));
@@ -33,6 +39,7 @@ function UpdateItem() {
   }, []);
 
   const updateAPIData = () => {
+    // API call to update the item with all the necessary details
     axios.put('/api/put/updateitem', {
       item_id,
       category_id,
@@ -45,6 +52,7 @@ function UpdateItem() {
     }).catch((err) => console.log(err))
   }
 
+  // conditionally rendered form for entering item details
   return (
     user_is_admin === 'true' ?
     <div>

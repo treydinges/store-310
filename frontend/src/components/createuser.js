@@ -1,8 +1,11 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Charles Dinges
+  -Purpose of this Page:
+    Creates a user with the parameters given in the form. Once the user enters the
+    desired details, they can press the submit button which will call the API 
+    and create the user within the database.
 --------------------------------------------------------------------------------*/
 
 import React, { useState } from 'react';
@@ -15,12 +18,14 @@ import Nav from './nav';
 
 function CreateUser() {
   let history = useHistory();
+  // user parameters to send to the API
   const [user_fname, set_user_fname] = useState('');
   const [user_lname, set_user_lname] = useState('');
   const [user_phone, set_user_phone] = useState('');
   const [user_password, set_user_password] = useState('');
   const [user_is_admin, set_user_is_admin] = useState('false');
 
+  // API call to create the user
   const postData = () => {
     axios.post('/api/post/createuser', {
       user_fname,
@@ -33,6 +38,7 @@ function CreateUser() {
     }).catch((err) => console.log(err))
   }
 
+  // form for entering user details and creating the user
   return (
     <div>
       <Nav></Nav>

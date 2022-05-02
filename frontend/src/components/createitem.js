@@ -1,8 +1,12 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Charles Dinges
+  -Purpose of this Page:
+    Creates an item with the parameters given in the form. This page is only accessible
+    by a user with admin permissions. The admin is shown a list of categories for the
+    items to go under, once the item detiails are to the user's liking, they can press
+    the submit button which will call the API and create the item within the database.
 --------------------------------------------------------------------------------*/
 
 import React, { useState } from 'react';
@@ -17,6 +21,7 @@ import Nav from './nav';
 function CreateItem() {
   let history = useHistory();
   const user_is_admin = localStorage.getItem('user_is_admin');
+  // item parameters to send to the API
   const [category_id, set_category_id] = useState(null);
   const [item_name, set_item_name] = useState('');
   const [item_price, set_item_price] = useState(0);
@@ -24,6 +29,7 @@ function CreateItem() {
   const [item_description, set_item_description] = useState('');
 
   const postData = () => {
+    // API call to create the item with all the necessary details
     axios.post('/api/post/createitem', {
       category_id,
       item_name,
@@ -35,6 +41,7 @@ function CreateItem() {
     }).catch((err) => console.log(err))
   }
 
+  // conditionally rendered form for entering item details
   return (
     user_is_admin === 'true' ?
     <div>
