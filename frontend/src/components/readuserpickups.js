@@ -12,8 +12,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Table, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+import { Table } from 'semantic-ui-react'
 import { useHistory } from 'react-router';
 
 import Nav from './nav';

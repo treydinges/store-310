@@ -7,13 +7,11 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, Button, Form } from 'semantic-ui-react'
-import { useHistory } from 'react-router';
+import { Table, Button, Form } from 'semantic-ui-react';
 import ViewCategory from './viewcategory';
 import Nav from './nav';
 
 function GetItemByCategory() {
-  let history = useHistory();
   const user_is_admin = localStorage.getItem('user_is_admin');
   const [category_name, set_category_name] = useState('');
   const [APIData, setAPIData] = useState([]);
