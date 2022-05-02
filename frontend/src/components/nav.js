@@ -43,6 +43,7 @@ function Nav() {
           <Button onClick={() => history.push('/readcategory')}>Categories</Button>
           <Button onClick={() => history.push('/readitem')}>Items</Button>
           <Button onClick={() => history.push('/readpickuplocation')}>Pickup Locations</Button>
+          <Button onClick={() => history.push('/readuserpickups')}>Read User Pickups</Button>
         </span>
       );
     } else {
