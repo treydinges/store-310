@@ -1,8 +1,10 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Nathaniel Wang
+  -Purpose of this Page: The purpose of this page is part of the category feature set
+    for the admin user, specifically the update feature of the feature set. Where the admin
+    is able to update the name of the categories for items to be categorized in.
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';

@@ -1,8 +1,11 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Nathaniel Wang
+  -Purpose of this Page: The purpose of this page is for wanting to view items
+    by category, users are able to enter a category into a search box that displays
+    the items of that specific category. The categories available are also listed
+    above the search box.
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';

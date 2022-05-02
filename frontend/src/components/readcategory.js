@@ -1,8 +1,9 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Nathaniel Wang
+  -Purpose of this Page: Component that takes care of Item categories, handles the
+  main functionality for the feature set of create, update, delete.
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';

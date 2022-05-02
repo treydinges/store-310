@@ -1,8 +1,10 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Nathaniel Wang
+  -Purpose of this Page: The main purpose of this page is to handle items in your
+    shopping cart. The user is able to increment and decrement the number of items
+    for a specific item, as well as delete an item from your own cart.
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';
