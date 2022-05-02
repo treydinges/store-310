@@ -1,8 +1,12 @@
 /* ----------------------------------------------------------------------------------
   -Team Number: Team 16
   -Project: Grocery Store Database and UI
-  -Page was coded by: 
-  -Purpose of this Page: 
+  -Page was coded by: Charles Dinges
+  -Purpose of this Page:
+    View all items within the database with links to update and delete each item
+    This page is only accessible by a user with admin permissions. Once the item 
+    detiails are to the user's liking, they can press the submit button which will
+    all the API and update the item within the database.
 --------------------------------------------------------------------------------*/
 
 import React, { useState, useEffect } from 'react';
@@ -23,6 +27,7 @@ function ReadItem() {
   }, [])
 
   const setData = (data) => {
+    // set the specific item data so we can update it on the update page
     let { item_id , category_id, item_name, item_price, item_qoh, item_description } = data;
     localStorage.setItem('item_id', item_id);
     localStorage.setItem('category_id', category_id);
@@ -33,6 +38,7 @@ function ReadItem() {
   }
 
   const getData = () => {
+    // API call to get all of the items
     axios.get('/api/get/getitems')
     .then((response) => {
       setAPIData(response.data);
@@ -40,6 +46,7 @@ function ReadItem() {
   }
 
   const onDelete = (item_id) => {
+    // API call to delete an item
     axios.put('/api/delete/deleteitem', {
       item_id
     }).then(() => {
@@ -47,6 +54,7 @@ function ReadItem() {
     })
   }
 
+  // conditionally rendered table with links to update and delete items
   return (
     user_is_admin === 'true' ?
     <div>
