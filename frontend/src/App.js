@@ -13,9 +13,12 @@ import CreateCategory from './components/createcategory';
 import UpdateCategory from './components/updatecategory';
 import ReadCategory from './components/readcategory';
 
+
 import CreateItem from './components/createitem';
 import UpdateItem from './components/updateitem';
 import ReadItem from './components/readitem';
+import GetItemByName from './components/getitembyname';
+import GetItemByCategory from './components/getitembycategory';
 
 import ReadFavorite from './components/readfavorite';
 
@@ -50,6 +53,8 @@ function App() {
           <Route exact path='/createitem' component={CreateItem} />
           <Route exact path='/updateitem' component={UpdateItem} />
           <Route exact path='/readitem' component={ReadItem} />
+          <Route exact path='/getitembyname' component={GetItemByName} />
+          <Route exact path='/getitembycategory' component={GetItemByCategory} />
 
           <Route exact path='/readfavorite' component={ReadFavorite} />
 

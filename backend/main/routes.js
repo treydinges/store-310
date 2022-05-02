@@ -580,6 +580,12 @@ router.put('/api/put/updatepickups', (req, res, next) => {
   })
 })
 
+
+/* --------------------------------------------------------------------------
+ * the following queries were written by Nathaniel Wang
+-----------------------------------------------------------------------------*/
+
+//
 router.put('/api/put/updateorder', (req, res, next) => {
   const values = [ req.body.user_id,
                    req.body.order_id
@@ -587,6 +593,34 @@ router.put('/api/put/updateorder', (req, res, next) => {
   pool.query(`UPDATE orders SET is_complete = 'true'
                 WHERE user_id = $1
                 AND order_id = $2`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
+
+// get the shopping cart id for the given user
+// a shopping cart is an order that has not yet been completed
+router.put('/api/get/getitembyname', (req, res, next ) => {
+  const values = [ req.body.item_name,
+                 ]
+
+  pool.query(`SELECT *
+              FROM items
+              WHERE item_name = $1`, values,
+    (q_err, q_res) => {
+      if(q_err) return next(q_err);
+      res.json(q_res.rows);
+  })
+})
+
+router.put('/api/get/getitembycategory', (req, res, next ) => {
+  const values = [ req.body.category_name,
+                 ]
+
+  pool.query(`SELECT i.*
+              FROM items i, categories c
+              WHERE i.category_id = c.category_id and c.category_name = $1`, values,
     (q_err, q_res) => {
       if(q_err) return next(q_err);
       res.json(q_res.rows);
